@@ -6,7 +6,7 @@ class SoapWsdlRouterBuilder
 
     for(const service in config.routes)
     {
-      serviceRoutes[config.service][config.service + '_Port'][service] = async () =>
+      serviceRoutes[config.service + '_Service'][config.service + '_Port'][service] = async () =>
       {
         try
         {
