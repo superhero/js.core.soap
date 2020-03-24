@@ -11,12 +11,12 @@ class SoapWsdlRouterBuilder
         try
         {
           const
-          Endpoint = require(config.routes[service].endpoint),
-          endpoint = new Endpoint(locator, view)
+          Dispatcher = require(config.routes[service].endpoint),
+          dispatcher = new Dispatcher(locator, view)
 
-          await endpoint.dispatch()
+          await dispatcher.dispatch()
 
-          return endpoint.view
+          return dispatcher.view
         }
         catch(error)
         {

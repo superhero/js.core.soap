@@ -18,13 +18,13 @@ core.locate('core/bootstrap').bootstrap().then(() =>
       {
          'sayHello':
          {
-            endpoint  : 'api/endpoint/create-calculation',
+            endpoint  : 'api/endpoint/say-hello',
             input     : 'event/requested-to-say-hello',
             output    : 'event/requested-to-say-hello-response'
          },
          'sayGoodbye':
          {
-            endpoint  : 'api/endpoint/create-calculation',
+            endpoint  : 'api/endpoint/say-goodbye',
             input     : 'event/requested-to-say-goodbye',
             output    : 'event/requested-to-say-goodbye-response'
          }
@@ -35,26 +35,26 @@ core.locate('core/bootstrap').bootstrap().then(() =>
 
   //
 
-   const result2 = core.locate('soap/wsdl/route-builder').build(
-   {
-      location  : 'http://localhost:8000/wsdl',
-      service   : 'HelloService',
-      routes    :
-      {
-         'sayHello':
-         {
-            endpoint  : 'api/endpoint/create-calculation',
-            input     : 'event/requested-to-say-hello',
-            output    : 'event/requested-to-say-hello-response'
-         },
-         'sayGoodbye':
-         {
-            endpoint  : 'api/endpoint/create-calculation',
-            input     : 'event/requested-to-say-goodbye',
-            output    : 'event/requested-to-say-goodbye-response'
-         }
-      }
-   })
+  const result2 = core.locate('soap/wsdl/route-builder').build(
+  {
+    location  : 'http://localhost:8000/wsdl',
+    service   : 'HelloService',
+    routes    :
+    {
+     'sayHello':
+     {
+       endpoint  : 'api/endpoint/say-hello',
+       input     : 'event/requested-to-say-hello',
+       output    : 'event/requested-to-say-hello-response'
+     },
+     'sayGoodbye':
+     {
+       endpoint  : 'api/endpoint/say-goodbye',
+       input     : 'event/requested-to-say-goodbye',
+       output    : 'event/requested-to-say-goodbye-response'
+     }
+    }
+  })
 
-   console.log(result2)
+  console.log(result2)
 })
