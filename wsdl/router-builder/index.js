@@ -1,6 +1,6 @@
 class SoapWsdlRouterBuilder
 {
-  build(routes)
+  build(config)
   {
     const serviceRoutes = { [config.service]:{ [config.service + '_Port']:{} } }
 
