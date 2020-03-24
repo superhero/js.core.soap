@@ -63,8 +63,8 @@ class SoapWsdlXmlBuilder
     {
       wsdl += `
       <operation name="${operation}">
-        <input  message="tns:${config.routes[operation].input}"/>
-        <output message="tns:${config.routes[operation].output}"/>
+        <input  message="tns:${schemas[config.routes[operation].input].messageName}"/>
+        <output message="tns:${schemas[config.routes[operation].output].messageName}"/>
       </operation>
       `
     }
