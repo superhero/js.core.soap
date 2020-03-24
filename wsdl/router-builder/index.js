@@ -16,6 +16,8 @@ class SoapWsdlRouterBuilder
       {
         const fullPathname = `${this.path.main.dirname}/${config.routes[name].endpoint}`
 
+        console.log('*****************', fullPathname)
+
         if(this.path.isResolvable(fullPathname))
         {
           try
