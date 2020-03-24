@@ -1,8 +1,9 @@
 class SoapWsdlRouterBuilder
 {
-  constructor(locator)
+  constructor(locator, path)
   {
-    this.locator = locator
+    this.locator  = locator
+    this.path     = path
   }
 
   build(config)
@@ -13,46 +14,59 @@ class SoapWsdlRouterBuilder
     {
       serviceRoutes[config.service + '_Service'][config.service + '_Port'][name] = async (input) =>
       {
-        console.log(__filename)
+        const fullPathname = `${this.path.main.dirname}/${config.routes[name].endpoint}`
 
-        try
+        if(this.path.isResolvable(fullPathname))
         {
-          const
-          view        = {},
-          Dispatcher  = require(config.routes[name].endpoint),
-          dispatcher  = new Dispatcher(input, this.locator, view)
-
-          await dispatcher.dispatch()
-
-          return dispatcher.view.body
-        }
-        catch(error)
-        {
-          const fault =
+          try
           {
-            Fault:
-            {
-              Code:
-              {
-                Value   : 'soap:Sender',
-                Subcode :
-                {
-                  value : 'rpc:BadArguments'
-                }
-              },
-              Reason:
-              {
-                Text: error.message
-              }
-            }
-          }
+            const
+            view        = {},
+            Dispatcher  = require(fullPathname),
+            dispatcher  = new Dispatcher(input, this.locator, view)
 
-          throw fault
+            await dispatcher.dispatch()
+
+            return dispatcher.view.body
+          }
+          catch(error)
+          {
+            this.throwSoapFaultError(error.message)
+          }
+        }
+        else
+        {
+          const msg = `dispatcher "${config.routes[name].endpoint}" can not be resolved`
+          this.throwSoapFaultError(msg)
         }
       }
     }
 
     return serviceRoutes
+  }
+
+  throwSoapFaultError(message)
+  {
+    const fault =
+    {
+      Fault:
+      {
+        Code:
+        {
+          Value   : 'soap:Sender',
+          Subcode :
+          {
+            value : 'rpc:BadArguments'
+          }
+        },
+        Reason:
+        {
+          Text: message
+        }
+      }
+    }
+
+    throw fault
   }
 }
 
