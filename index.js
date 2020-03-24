@@ -7,11 +7,11 @@ class Soap
     this.wsdlRouterBuilder  = wsdlRouterBuilder
   }
 
-  listen(server, routes)
+  listen(server, config)
   {
     const
-    wsdlXml     = this.wsdlXmlBuilder.build(routes),
-    wsdlRouter  = this.wsdlRouterBuilder.build(routes)
+    wsdlXml     = this.wsdlXmlBuilder.build(config),
+    wsdlRouter  = this.wsdlRouterBuilder.build(config)
 
     this.soap.listen(server, '/wsdl', wsdlRouter, wsdlXml, this.onListening.bind(this))
   }
