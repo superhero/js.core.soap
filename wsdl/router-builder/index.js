@@ -16,8 +16,6 @@ class SoapWsdlRouterBuilder
       {
         const fullPathname = `${this.path.main.dirname}/${config.routes[name].endpoint}`
 
-        console.log('*****************', fullPathname)
-
         if(this.path.isResolvable(fullPathname))
         {
           try
@@ -33,6 +31,7 @@ class SoapWsdlRouterBuilder
           }
           catch(error)
           {
+            throw error
             this.throwSoapFaultError(error.message)
           }
         }
