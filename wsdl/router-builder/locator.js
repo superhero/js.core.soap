@@ -10,7 +10,7 @@ class SoapWsdlRouterBuilderLocator
 
   locate()
   {
-    return new SoapWsdlRouterBuilder()
+    return new SoapWsdlRouterBuilder(this.locator)
   }
 }
 

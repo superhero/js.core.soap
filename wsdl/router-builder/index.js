@@ -1,5 +1,10 @@
 class SoapWsdlRouterBuilder
 {
+  constructor(locator)
+  {
+    this.locator = locator
+  }
+
   build(config)
   {
     const serviceRoutes = { [config.service + '_Service']:{ [config.service + '_Port']:{} } }
@@ -8,11 +13,14 @@ class SoapWsdlRouterBuilder
     {
       serviceRoutes[config.service + '_Service'][config.service + '_Port'][service] = async (input) =>
       {
+        console.log(__filename)
+
         try
         {
           const
-          Dispatcher = require(config.routes[service].endpoint),
-          dispatcher = new Dispatcher(input, locator, view)
+          view        = {},
+          Dispatcher  = require(config.routes[service].endpoint),
+          dispatcher  = new Dispatcher(input, this.locator, view)
 
           await dispatcher.dispatch()
 
