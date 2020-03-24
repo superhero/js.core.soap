@@ -31,7 +31,6 @@ class SoapWsdlRouterBuilder
           }
           catch(error)
           {
-            throw error
             this.throwSoapFaultError(error.message)
           }
         }
