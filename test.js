@@ -92,12 +92,12 @@ const xml2 = `
 	<message name="RequestedToSayGoodbyeResponse"></message>
 	<portType name="HelloService_PortType">
 		<operation name="sayHello">
-			<input  message="tns:event/requested-to-say-hello"/>
-			<output message="tns:event/requested-to-say-hello-response"/>
+			<input  message="tns:RequestedToSayHello"/>
+			<output message="tns:RequestedToSayHelloResponse"/>
 		</operation>
 		<operation name="sayGoodbye">
-			<input  message="tns:event/requested-to-say-goodbye"/>
-			<output message="tns:event/requested-to-say-goodbye-response"/>
+			<input  message="tns:RequestedToSayGoodbye"/>
+			<output message="tns:RequestedToSayGoodbyeResponse"/>
 		</operation>
 	</portType>
 	<binding name="HelloService_Binding" type="tns:HelloService_PortType">
