@@ -52,10 +52,12 @@ class SoapWsdlXmlBuilder
 
       for(const arg in schemas[key].schema)
       {
-        wsdl += `<part name="${arg}" type="xsd:${schemas[key].schema[arg].type}"/>`
+        wsdl += `
+        <part name="${arg}" type="xsd:${schemas[key].schema[arg].type}"/>`
       }
 
-      wsdl += `</message>`
+      wsdl += `
+      </message>`
     }
 
     wsdl += `<portType name="${config.service}_PortType">`
