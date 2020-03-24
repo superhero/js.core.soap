@@ -14,8 +14,6 @@ class SoapWsdlRouterBuilder
     {
       serviceRoutes[config.service + '_Service'][config.service + '_Port'][name] = async (input) =>
       {
-        return { foo:'bar' }
-        /*
         const fullPathname = `${this.path.main.dirname}/${config.routes[name].endpoint}`
 
         if(this.path.isResolvable(fullPathname))
@@ -29,7 +27,7 @@ class SoapWsdlRouterBuilder
 
             await dispatcher.dispatch()
 
-            return dispatcher.view.body
+            return dispatcher.view
           }
           catch(error)
           {
@@ -41,7 +39,6 @@ class SoapWsdlRouterBuilder
           const msg = `dispatcher "${config.routes[name].endpoint}" can not be resolved`
           this.throwSoapFaultError(msg)
         }
-        */
       }
     }
 
