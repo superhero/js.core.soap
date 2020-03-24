@@ -1,6 +1,4 @@
-const HttpError = require('.')
-
-class NotImplemented extends HttpError
+class NotImplemented
 {
   constructor(...args)
   {
