@@ -47,7 +47,8 @@ class SoapWsdlXmlBuilder
 
     for(const key in schemas)
     {
-      wsdl += `<message name="${schemas[key].messageName}">`
+      wsdl += `
+      <message name="${schemas[key].messageName}">`
 
       for(const arg in schemas[key].schema)
       {
