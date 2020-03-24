@@ -9,9 +9,9 @@ class SoapWsdlRouterBuilder
   {
     const serviceRoutes = { [config.service + '_Service']:{ [config.service + '_Port']:{} } }
 
-    for(const service in config.routes)
+    for(const name in config.routes)
     {
-      serviceRoutes[config.service + '_Service'][config.service + '_Port'][service] = async (input) =>
+      serviceRoutes[config.service + '_Service'][config.service + '_Port'][name] = async (input) =>
       {
         console.log(__filename)
 
@@ -19,7 +19,7 @@ class SoapWsdlRouterBuilder
         {
           const
           view        = {},
-          Dispatcher  = require(config.routes[service].endpoint),
+          Dispatcher  = require(config.routes[name].endpoint),
           dispatcher  = new Dispatcher(input, this.locator, view)
 
           await dispatcher.dispatch()
@@ -51,6 +51,8 @@ class SoapWsdlRouterBuilder
         }
       }
     }
+
+    return serviceRoutes
   }
 }
 
