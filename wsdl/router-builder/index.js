@@ -6,17 +6,17 @@ class SoapWsdlRouterBuilder
 
     for(const service in config.routes)
     {
-      serviceRoutes[config.service + '_Service'][config.service + '_Port'][service] = async () =>
+      serviceRoutes[config.service + '_Service'][config.service + '_Port'][service] = async (input) =>
       {
         try
         {
           const
           Dispatcher = require(config.routes[service].endpoint),
-          dispatcher = new Dispatcher(locator, view)
+          dispatcher = new Dispatcher(input, locator, view)
 
           await dispatcher.dispatch()
 
-          return dispatcher.view
+          return dispatcher.view.body
         }
         catch(error)
         {

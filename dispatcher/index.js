@@ -2,8 +2,9 @@ const NotImplementedError = require('./error/not-implemented')
 
 class SoapDispatcher
 {
-  constructor(locator, view)
+  constructor(input, locator, view)
   {
+    this.input    = input
     this.locator  = locator
     this.view     = view
   }

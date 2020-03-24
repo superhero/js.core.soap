@@ -4,7 +4,7 @@ var myService =
    {
       Hello_Port:
       {
-         sayHello: function(args)
+         sayHello: async (args) =>
          {
             return {
                greeting : 'Hello, ' + args.name
