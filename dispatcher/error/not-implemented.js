@@ -1,4 +1,4 @@
-class NotImplemented
+class NotImplemented extends Error
 {
   constructor(...args)
   {
