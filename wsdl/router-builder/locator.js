@@ -10,8 +10,11 @@ class SoapWsdlRouterBuilderLocator
 
   locate()
   {
-    const path = this.locator.locate('core/path')
-    return new SoapWsdlRouterBuilder(this.locator, path)
+    const
+    path      = this.locator.locate('core/path'),
+    composer  = this.locator.locate('core/schema/composer')
+
+    return new SoapWsdlRouterBuilder(this.locator, path, composer)
   }
 }
 
