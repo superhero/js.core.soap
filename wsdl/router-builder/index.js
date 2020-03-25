@@ -22,7 +22,8 @@ class SoapWsdlRouterBuilder
 
         if(this.path.isResolvable(fullPathname))
         {
-          return await this.dispatch(fullPathname, composedInput)
+          const view = await this.dispatch(fullPathname, composedInput)
+          return view
         }
         else
         {
