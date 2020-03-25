@@ -22,7 +22,7 @@ class SoapWsdlRouterBuilder
 
         if(this.path.isResolvable(fullPathname))
         {
-          this.dispatch(fullPathname, composedInput)
+          await this.dispatch(fullPathname, composedInput)
         }
         else
         {
@@ -35,7 +35,7 @@ class SoapWsdlRouterBuilder
     return serviceRoutes
   }
 
-  dispatch(fullPathname, composedInput)
+  async dispatch(fullPathname, composedInput)
   {
     try
     {

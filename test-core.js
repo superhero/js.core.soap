@@ -35,7 +35,7 @@ core.locate('core/bootstrap').bootstrap().then(() =>
 
   //
 
-  const result2 = core.locate('soap/wsdl/route-builder').build(
+  const result2 = core.locate('soap/wsdl/router-builder').build(
   {
     location  : 'http://localhost:8000/wsdl',
     service   : 'HelloService',
