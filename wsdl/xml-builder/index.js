@@ -52,8 +52,10 @@ class SoapWsdlXmlBuilder
 
       for(const arg in schemas[key].schema)
       {
+        const type = this.fetchAttributeType(schemas[key].schema[arg])
+
         wsdl += `
-        <part name="${arg}" type="xsd:${schemas[key].schema[arg].type}"/>`
+        <part name="${arg}" type="xsd:${type}"/>`
       }
 
       wsdl += `
@@ -115,6 +117,18 @@ class SoapWsdlXmlBuilder
     wsdl += `</definitions>`
 
     return wsdl
+  }
+
+  fetchAttributeType(schemaAttribute)
+  {
+    if(schemaAttribute.type === 'schema')
+    {
+      return this.fetchAttributeType(this.schemaComposer.schemas[schemaAttribute.schema][schemaAttribute.trait])
+    }
+    else
+    {
+      return schemaAttribute.type
+    }
   }
 }
 
