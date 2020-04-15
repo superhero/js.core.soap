@@ -13,11 +13,11 @@ class SoapWsdlRouterBuilder
 
     for(const name in config.routes)
     {
-      serviceRoutes[config.service + '_Service'][config.service + '_Port'][name] = async (input) =>
+      serviceRoutes[config.service + '_Service'][config.service + '_Port'][name] = async (input, _, headers) =>
       {
         const
         route         = config.routes[name],
-        composedInput = this.composeInput(route, input),
+        composedInput = this.composeInput(route, input, headers),
         fullPathname  = `${this.path.main.dirname}/${route.endpoint}`
 
         if(this.path.isResolvable(fullPathname))
@@ -84,11 +84,11 @@ class SoapWsdlRouterBuilder
     throw fault
   }
 
-  composeInput(route, input)
+  composeInput(route, input, headers)
   {
     try
     {
-      return this.composer.compose(route.input, input)
+      return this.composer.compose(route.input, [input, headers])
     }
     catch(error)
     {
@@ -97,6 +97,7 @@ class SoapWsdlRouterBuilder
       console.log(error.message)
       console.log(error.stack)
       console.log('---------')
+
       this.throwSoapFaultError(error.message)
     }
   }
