@@ -88,11 +88,31 @@ class SoapWsdlRouterBuilder
   {
     try
     {
+      for(const part of [input, headers])
+      {
+        if(part === null)
+        {
+          continue
+        }
+        if(typeof part === 'object')
+        {
+          for(const key in part)
+          {
+            if(typeof part[key] === 'object'
+            && '$value' in part[key])
+            {
+              part[key] = part[key]['$value']
+            }
+          }
+        }
+      }
+
       return this.composer.compose(route.input, [input, headers])
     }
     catch(error)
     {
       console.log('=========')
+      console.log({ input, headers })
       console.log(error.code)
       console.log(error.message)
       console.log(error.stack)
