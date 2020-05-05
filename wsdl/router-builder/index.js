@@ -51,12 +51,20 @@ class SoapWsdlRouterBuilder
     }
     catch(error)
     {
-      console.log('=========')
-      console.log(error.code)
-      console.log(error.message)
-      console.log(error.stack)
-      console.log('---------')
-      this.throwSoapFaultError(error.message)
+      if('Fault' in error)
+      {
+        throw error
+      }
+      else
+      {
+        console.log('=========')
+        console.log(error.code)
+        console.log(error.message)
+        console.log(error.stack)
+        console.log('---------')
+
+        this.throwSoapFaultError(error.message)
+      }
     }
   }
 

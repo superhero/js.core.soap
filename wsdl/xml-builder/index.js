@@ -107,7 +107,7 @@ class SoapWsdlXmlBuilder
 
     wsdl += `
     <service name = "${config.service}_Service">
-      <documentation>WSDL File for HelloService</documentation>
+      <documentation>${config.documentation}</documentation>
 
       <port binding="tns:${config.service}_Binding" name="${config.service}_Port">
         <soap:address location="${config.location}"/>
