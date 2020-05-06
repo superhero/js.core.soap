@@ -141,7 +141,7 @@ class SoapWsdlRouterBuilder
     {
       if (viewModel[key] === null)
       {
-        output[key] = { attributes: { nil: 'true' } }
+        output[key] = { attributes: { 'xsi:nil': 'true' } }
       }
       else
       {
