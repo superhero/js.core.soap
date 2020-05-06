@@ -139,9 +139,10 @@ class SoapWsdlRouterBuilder
 
     for (const key in viewModel)
     {
-      if (viewModel[key] === null)
+      if(viewModel[key] === null
+      || viewModel[key] === '')
       {
-        output[key] = { attributes: { 'xsi:nil': 'true' } }
+        output[key] = undefined
       }
       else
       {
