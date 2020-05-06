@@ -41,9 +41,10 @@ class SoapWsdlXmlBuilder
       name            = "${config.service}"
       targetNamespace = "${config.location}/${config.service}.wsdl"
       xmlns           = "http://schemas.xmlsoap.org/wsdl/"
+      xmlns:xsi       = "http://www.w3.org/2001/XMLSchema-instance"
       xmlns:soap      = "http://schemas.xmlsoap.org/wsdl/soap/"
       xmlns:tns       = "${config.location}/${config.service}.wsdl"
-      xmlns:xsd       = "http://www.w3.org/2001/XMLSchema">`
+      xmlns:xs        = "http://www.w3.org/2001/XMLSchema">`
 
     for(const key in schemas)
     {
@@ -55,7 +56,7 @@ class SoapWsdlXmlBuilder
         const type = this.fetchAttributeType(schemas[key].schema[arg])
 
         wsdl += `
-        <part name="${arg}" type="xsd:${type}"/>`
+        <part name="${arg}" type="xs:${type}"/>`
       }
 
       wsdl += `

@@ -22,7 +22,10 @@ class SoapWsdlRouterBuilder
 
         if(this.path.isResolvable(fullPathname))
         {
-          const view = await this.dispatch(fullPathname, composedInput)
+          const
+          view        = await this.dispatch(fullPathname, composedInput),
+          mappedView  = this.mapNullValues(view)
+
           return view
         }
         else
@@ -128,6 +131,25 @@ class SoapWsdlRouterBuilder
 
       this.throwSoapFaultError(error.message)
     }
+  }
+
+  mapNullValues(viewModel)
+  {
+    const output = {}
+
+    for (const key in viewModel)
+    {
+      if (viewModel[key] === null)
+      {
+        output[key] = { attributes: { nil: 'true' } }
+      }
+      else
+      {
+        output[key] = viewModel[key]
+      }
+    }
+
+    return output
   }
 }
 

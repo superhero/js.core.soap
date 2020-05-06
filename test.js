@@ -7,7 +7,7 @@ var myService =
          sayHello: async (args) =>
          {
             return {
-               greeting : 'Hello, ' + args.name
+               greeting : { attributes:{ 'xsi:nil':true }} // 'Hello, ' + args.name
             }
          }
       }
@@ -29,16 +29,17 @@ const xml = `
 <definitions name = "HelloService"
    targetNamespace = "http://localhost:8000/wsdl/HelloService.wsdl"
    xmlns = "http://schemas.xmlsoap.org/wsdl/"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
    xmlns:soap = "http://schemas.xmlsoap.org/wsdl/soap/"
    xmlns:tns = "http://localhost:8000/wsdl/HelloService.wsdl"
-   xmlns:xsd = "http://www.w3.org/2001/XMLSchema">
+   xmlns:xs = "http://www.w3.org/2001/XMLSchema">
 
    <message name = "SayHelloRequest">
-      <part name = "name" type = "xsd:string"/>
+      <part name = "name" type = "xs:string"/>
    </message>
 
    <message name = "SayHelloResponse">
-      <part name = "greeting" type = "xsd:string"/>
+      <part name = "greeting" type = "xs:string"/>
    </message>
 
    <portType name = "Hello_PortType">
@@ -148,14 +149,14 @@ soap.listen(server, '/wsdl', myService, xml, function()
    var url = 'http://localhost:8000/wsdl?wsdl';
    var args = { name:'World' };
 
-   soap.createClient(url, async function(err, client)
+   soap.createClient(url, { handleNilAsNull:true }, async function(err, client)
    {
       if(err)
          console.log(err)
 
       else
       {
-         const result = await client.sayHello(args, function(err, result)
+         const result = await client.sayHello(args, { handleNilAsNull:true }, function(err, result)
          {
             if(err)
                console.log(err)
