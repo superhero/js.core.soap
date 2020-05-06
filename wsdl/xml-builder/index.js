@@ -38,13 +38,12 @@ class SoapWsdlXmlBuilder
 
     let wsdl = `
     <definitions
-      name            = "${config.service}"
-      targetNamespace = "${config.location}/${config.service}.wsdl"
-      xmlns           = "http://schemas.xmlsoap.org/wsdl/"
-      xmlns:xsi       = "http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:soap      = "http://schemas.xmlsoap.org/wsdl/soap/"
-      xmlns:tns       = "${config.location}/${config.service}.wsdl"
-      xmlns:xs        = "http://www.w3.org/2001/XMLSchema">`
+      name        = "${config.service}"
+      xmlns       = "http://schemas.xmlsoap.org/wsdl/"
+      xmlns:xsi   = "http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:soap  = "http://schemas.xmlsoap.org/wsdl/soap/"
+      xmlns:tns   = "${config.location}/${config.service}.wsdl"
+      xmlns:xs    = "http://www.w3.org/2001/XMLSchema">`
 
     for(const key in schemas)
     {
