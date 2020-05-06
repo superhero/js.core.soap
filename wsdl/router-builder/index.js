@@ -26,7 +26,7 @@ class SoapWsdlRouterBuilder
           view        = await this.dispatch(fullPathname, composedInput),
           mappedView  = this.mapNullValues(view)
 
-          return view
+          return mappedView
         }
         else
         {
