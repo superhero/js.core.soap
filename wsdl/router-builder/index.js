@@ -105,11 +105,13 @@ class SoapWsdlRouterBuilder
         {
           continue
         }
-        if(typeof part === 'object')
+        if(part !== null
+        && typeof part === 'object')
         {
           for(const key in part)
           {
-            if(typeof part[key] === 'object'
+            if(part[key] !== null
+            && typeof part[key] === 'object'
             && '$value' in part[key])
             {
               part[key] = part[key]['$value']
