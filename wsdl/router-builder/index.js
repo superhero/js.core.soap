@@ -1,10 +1,11 @@
 class SoapWsdlRouterBuilder
 {
-  constructor(locator, path, composer)
+  constructor(locator, path, composer, errorMapper)
   {
-    this.locator  = locator
-    this.path     = path
-    this.composer = composer
+    this.locator      = locator
+    this.path         = path
+    this.composer     = composer
+    this.errorMapper  = errorMapper
   }
 
   build(config)
@@ -30,8 +31,13 @@ class SoapWsdlRouterBuilder
         }
         else
         {
-          const msg = `dispatcher "${route.endpoint}" can not be resolved`
-          this.throwSoapFaultError(msg)
+          const 
+          msg   = `dispatcher "${route.endpoint}" can not be resolved`,
+          error = new Error(msg)
+
+          error.code = 'E_SOAP_ENDPOINT_UNRESOLVABLE'
+
+          throw this.errorMapper.mapFromErrorToSoapFault(error)
         }
       }
     }
@@ -60,39 +66,9 @@ class SoapWsdlRouterBuilder
       }
       else
       {
-        console.log('=========')
-        console.log(error.code)
-        console.log(error.message)
-        console.log(error.stack)
-        console.log('---------')
-
-        this.throwSoapFaultError(error.message)
+        throw this.errorMapper.mapFromErrorToSoapFault(error)
       }
     }
-  }
-
-  throwSoapFaultError(message)
-  {
-    const fault =
-    {
-      Fault:
-      {
-        Code:
-        {
-          Value   : 'soap:Sender',
-          Subcode :
-          {
-            value : 'rpc:BadArguments'
-          }
-        },
-        Reason:
-        {
-          Text: message
-        }
-      }
-    }
-
-    throw fault
   }
 
   composeInput(route, input, headers)
@@ -124,14 +100,8 @@ class SoapWsdlRouterBuilder
     }
     catch(error)
     {
-      console.log('=========')
-      console.log({ input, headers })
-      console.log(error.code)
-      console.log(error.message)
-      console.log(error.stack)
-      console.log('---------')
-
-      this.throwSoapFaultError(error.message)
+      error.code = 'E_SOAP_COMPOSE_INPUT'
+      throw this.errorMapper.mapFromErrorToSoapFault(error)
     }
   }
 
