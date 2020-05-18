@@ -37,7 +37,7 @@ class SoapWsdlRouterBuilder
 
           error.code = 'E_SOAP_ENDPOINT_UNRESOLVABLE'
 
-          throw this.errorMapper.mapFromErrorToSoapFault(error)
+          throw this.errorMapper.toSoapFault(error)
         }
       }
     }
@@ -66,7 +66,7 @@ class SoapWsdlRouterBuilder
       }
       else
       {
-        throw this.errorMapper.mapFromErrorToSoapFault(error)
+        throw this.errorMapper.toSoapFault(error)
       }
     }
   }
@@ -101,7 +101,7 @@ class SoapWsdlRouterBuilder
     catch(error)
     {
       error.code = 'E_SOAP_COMPOSE_INPUT'
-      throw this.errorMapper.mapFromErrorToSoapFault(error)
+      throw this.errorMapper.toSoapFault(error)
     }
   }
 

@@ -14,7 +14,7 @@ class SoapWsdlRouterBuilderLocator
     configuration       = this.locator.locate('core/configuration'),
     path                = this.locator.locate('core/path'),
     composer            = this.locator.locate('core/schema/composer'),
-    errorMapperLocation = configuration.find('soap/error-mapper'),
+    errorMapperLocation = configuration.find('core/soap/error-mapper'),
     errorMapper         = this.locator.locate(errorMapperLocation)
 
     return new SoapWsdlRouterBuilder(this.locator, path, composer, errorMapper)
