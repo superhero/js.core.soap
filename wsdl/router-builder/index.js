@@ -60,14 +60,7 @@ class SoapWsdlRouterBuilder
     }
     catch(error)
     {
-      if('Fault' in error)
-      {
-        throw error
-      }
-      else
-      {
-        throw this.errorMapper.toSoapFault(error)
-      }
+      throw this.errorMapper.toSoapFault(error)
     }
   }
 

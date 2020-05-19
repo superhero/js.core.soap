@@ -6,7 +6,7 @@ class SoapErrorMapper
   /**
    * @param {Error} error
    */
-  async toSoapFault(error)
+  toSoapFault(error)
   {
     const
     subcode = error.code,
