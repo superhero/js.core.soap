@@ -91,14 +91,14 @@ class SoapWsdlXmlBuilder
         <input>
           <soap:body
             encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/"
-            namespace     = "tns:${config.service}"
+            namespace     = "${config.location}/${config.service}.wsdl"
             use           = "encoded"/>
         </input>
 
         <output>
           <soap:body
             encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/"
-            namespace     = "tns:${config.service}"
+            namespace     = "${config.location}/${config.service}.wsdl"
             use           = "encoded"/>
         </output>
       </operation>`
